@@ -10,6 +10,7 @@ public class QnaDTO {
 	private int b2_view;
 	private Timestamp b2_date;
 	private int b2_reply;
+	private int b2_step;
 	
 	public int getB2_num() {
 		return b2_num;
@@ -52,6 +53,12 @@ public class QnaDTO {
 	}
 	public void setB2_reply(int b2_reply) {
 		this.b2_reply = b2_reply;
+	}
+	public int getB2_step() {
+		return b2_step;
+	}
+	public void setB2_step(int b2_step) {
+		this.b2_step = b2_step;
 	}
 	
 	

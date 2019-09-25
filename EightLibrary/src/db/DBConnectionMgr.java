@@ -76,8 +76,8 @@ public class DBConnectionMgr {
     public DBConnectionMgr() throws IOException {
     	Properties props=new Properties();
     	FileInputStream in=new FileInputStream
-    			
-    			("C:/webtest/4.jsp/sou/EightLibrary/WebContent/dbtest/dbmysql.properties");
+    			("C:/Users/kitcoop/git/EightLibrary/EightLibrary/WebContent/dbtest/dbmysql.properties");
+    			//("C:/webtest/4.jsp/sou/EightLibrary/WebContent/dbtest/dbmysql.properties");
     	props.load(in);//占쎈솁占쎌뵬占쎌벥 占쎄땀占쎌뒠 筌롫뗀�걟�뵳�딅퓠 �겫�뜄�쑎占쎌궎疫뀐옙
     	in.close();
     	_driver=props.getProperty("jdbc.drivers");

@@ -9,7 +9,7 @@ import java.util.*;//List
 
 public class QnaAction implements CommandAction {
 
-	 // /list.do로 요청이 들어왔을때 처리해주는 구문
+	 // /qna.do로 요청이 들어왔을때 처리해주는 구문
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		// TODO Auto-generated method stub
@@ -17,7 +17,7 @@ public class QnaAction implements CommandAction {
 		//추가(검색분야,검색어)
 		String search=request.getParameter("search");//검색분야
 		String searchtext=request.getParameter("searchtext");
-		System.out.println("ListAction의 매개변수 확인");
+		System.out.println("QnaAction의 매개변수 확인");
 		System.out.println("pageNum="+pageNum+",search="+search+",searchtext="+searchtext);
 		
 		int count=0;//총레코드수

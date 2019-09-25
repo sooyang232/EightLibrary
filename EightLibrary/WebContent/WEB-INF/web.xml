@@ -8,7 +8,8 @@
     <servlet-class>controller.ControllerAction</servlet-class>
     <init-param>
         <param-name>propertyConfig</param-name>
-        <param-value>C:/webtest/4.jsp/sou/EightLibrary/WebContent/WEB-INF/commandPro.properties</param-value>
+        <param-value>C:/Users/kitcoop/git/EightLibrary/EightLibrary/WebContent/WEB-INF/commandPro.properties</param-value>
+        <!-- <param-value>C:/webtest/4.jsp/sou/EightLibrary/WebContent/WEB-INF/commandPro.properties</param-value> -->
     </init-param>
   </servlet>
   
