@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -128,7 +130,9 @@
                                 <dt class="author">작성자</dt>
                                 <dd class="author r-sep">${article.userID }</dd>
                                 <dt class="date">작성일</dt>
-                                <dd class="date r-sep">${article.b2_date }</dd>
+                                <dd class="date r-sep">
+                                	<fmt:formatDate value="${article.b2_date}" pattern="yyyy-MM-dd" />
+                                </dd>
                                 <dt class="view">조회</dt>
                                 <dd class="view">${article.b2_view }</dd>
                                 <%-- <dd class="view r-sep">${article.b2_view }</dd> --%>
