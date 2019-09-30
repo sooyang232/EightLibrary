@@ -207,7 +207,7 @@
                         <a href="#" class="page-btn next">다음</a>
                     </div>
         			<div class="btn-area tar mt0">
-                    	<a href="writeQna.jsp" role="button" class="btn deep-blue">글쓰기</a>
+                    	<a href="writeQna.do" role="button" class="btn deep-blue">글쓰기</a>
                 	</div>
                 </div>
 			</div>

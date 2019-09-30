@@ -20,14 +20,14 @@
 		<div class="top-area">
 			<div class="inner-max">
 				<h1 class="top-logo">
-					<a href="#">
+					<a href="index.html">
 						<span class="site-logo">Eight Library</span>
 					</a>
 				</h1>
 				<div class="top-gnb">
 					<ul class="gnb-list">
-						<li class="login"><a href="/member/login.html">로그인</a></li>
-						<li><a href="/member/join.html">회원가입</a></li>
+						<li class="login"><a href="login.html">로그인</a></li>
+						<li><a href="join1.html">회원가입</a></li>
 					</ul>
 				</div>
 				<button type="button" class="btn-all-menu" id="show-menu">
@@ -45,54 +45,65 @@
 					<h2 class="hide">주메뉴</h2>
 					<ul class="main-nav-list">
 						<li>
-							<a href="#">자료검색</a>
+							<a href="search.html">자료검색</a>
 							<ul class="sub-menu">
-								<li><a href="#">통합검색</a></li>
-								<li><a href="#">소장자료</a></li>
-								<li><a href="#">신착자료</a></li>
+								<li><a href="search.html">통합검색</a></li>
+                                <li><a href="newarrivalbook.html">신착도서</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="#">열람실예약</a>
+							<a href="reserveroom.html">열람실예약</a>
 							<ul class="sub-menu">
-								<li><a href="#">예약신청</a></li>
-								<li><a href="#">예약확인/취소</a></li>
+								<li><a href="reserveroom.html">예약신청</a></li>
+								<li><a href="reserveroomstatus.html">예약확인/취소</a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="#">커뮤니티</a>
+							<a href="board.html">커뮤니티</a>
 							<ul class="sub-menu">
-								<li><a href="#">공지&새소식</a></li>
-								<li><a href="#">자주하는 질문(FAQ)</a></li>
-								<li><a href="#">질문 및 답변(Q&A)</a></li>
-								<li><a href="#">자유게시판</a></li>
-								<li><a href="#">서식 자료실</a></li>
-								<li><a href="#">도서관안내</a></li>
+								<li><a href="board.html">공지&새소식</a></li>
+								<li><a href="faq.do">자주하는 질문(FAQ)</a></li>
+								<li><a href="qna.do">질문 및 답변(Q&A)</a></li>
+								<li><a href="board.do">자유게시판</a></li>
+								<li><a href="award.html">다독상현황</a></li>
 							</ul>
 						</li>
+                        <li>
+                            <a href="contFacility.html">도서관소개</a>
+                            <ul class="sub-menu">
+                                <li><a href="contFacility.html">시설현황</a></li>
+                                <li><a href="contData.html">자료현황</a></li>
+                                <li><a href="contInfomation.html">이용안내</a></li>
+                                <li><a href="contDirections.html">찾아오시는길</a></li>
+                            </ul>
+                        </li>
 						<li>
-							<a href="#">내서재</a>
+							<a href="mypage1.html">마이페이지</a>
 							<ul class="sub-menu">
 								<li>
-									<a href="#">대출/예약/이력</a>
+									<a href="usermodify.html">회원정보</a>
 									<ul>
-										<li><a href="#">대출현황</a></li>
-										<li><a href="#">예약현황</a></li>
-										<li><a href="#">대출이력</a></li>
+										<li><a href="usermodify.html">회원정보수정</a></li>
+										<li><a href="passwordchange.html">비밀번호변경</a></li>
+										<li><a href="withdraw.html">회원탈퇴</a></li>
+										<li><a href="contPrivacy.html">개인정보처리방침</a></li>
+										<li><a href="contEmail.html">이메일무단수집거부</a></li>
+									</ul>
+								</li>								
+								<li>
+									<a href="mypage1.html">대출/예약/이력</a>
+									<ul>
+										<li><a href="mypage1.html">대출현황</a></li>
+										<li><a href="mypage2.html">예약현황</a></li>
+										<li><a href="mypage3.html">대출이력</a></li>
 									</ul>
 								</li>
+								<li><a href="basketlist.html">관심도서</a></li>
 								<li>
-									<a href="#">희망도서신청</a>
+									<a href="myboard1.html">나의 게시글</a>
 									<ul>
-										<li><a href="#">신청하기</a></li>
-										<li><a href="#">신청조회</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="#">나의 게시글</a>
-									<ul>
-										<li><a href="#">질문 및 답변(Q&A)</a></li>
-										<li><a href="#">자유게시판</a></li>
+										<li><a href="myboard1.html">질문 및 답변(Q&A)</a></li>
+										<li><a href="myboard1.html">자유게시판</a></li>
 									</ul>
 								</li>							
 							</ul>
@@ -119,7 +130,14 @@
                 </div>
                 
                 <div class="board regist-area">
-                    <form name="registForm" id="registForm" method="post">
+                    <form name="registForm" id="registForm" method="post"
+                    			action="writeProQna.do" onsubmit="return writeSave()">
+                    			
+                    	<!-- 입력하지 않고 매개변수로 전달해서 테이블에 저장 (hidden) -->  
+   						<input type="hidden" name="b2_num" value="${b2_num}">
+						<input type="hidden" name="b2_reply" value="${b2_reply}">
+						<input type="hidden" name="b2_step" value="${b2_step}">
+						
                         <table class="table th-bg">
                             <colgroup>
                                 <col width="15%">
@@ -127,12 +145,15 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <th scope="row"><label for="title">제목</label></th>
-                                    <td><input type="text" class="form" name="title" id="title"></td>
+                                    <th scope="row"><label for="b2_title">제목</label></th>
+                                    <td><input type="text" class="form" name="b2_title" id="b2_title"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">작성자</th>
-                                    <td>userID</td>
+                                    <th scope="row"><label for="userID">작성자</label></th>
+                                    <td>
+                                    	<%-- <input type="hidden" name="userID" value="${userID}"> --%>
+                                    	<input type="text" class="form" name="userID" id="userID">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row"><label for="secretY">공개여부</label></th>
@@ -142,16 +163,20 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label for="content">내용</label></th>
-                                    <td><textarea name="content" id="content" rows="15" class="form" title="상세 내용 입력"></textarea></td>
+                                    <th scope="row"><label for="b2_content">내용</label></th>
+                                    <td><textarea name="b2_content" id="b2_content" rows="15" class="form" title="상세 내용 입력"></textarea></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <!-- form 작성 내용 전달위해 form 태그 안에서 전송버튼 필요 -->
+                        <input type="submit" value="등록">
                     </form>
                 </div>
                 <div class="btn-area tar">
-                    <a href="#" role="button" class="btn deep-blue">등록</a>
-                    <a href="#" role="button" class="btn blue-gray">취소</a>
+                	<!-- <input type="submit" value="등록" class="btn deep-blue"> -->
+                    <!-- <a href="#" role="button" class="btn deep-blue">등록</a> -->
+                    <!-- <input type="submit" value="등록"> -->
+                    <a href="qna.do" role="button" class="btn blue-gray">취소</a>
                 </div>
 			</div>
 		</div>

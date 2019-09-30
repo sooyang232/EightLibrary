@@ -226,11 +226,52 @@ public class QnaDAO {
 	}
 
 	// 게시판 글쓰기
-
+	public void insertArticle(QnaDTO article) {
+		
+		int b2_num=0;		//글번호
+		int b2_reply=0;	//그룹번호
+		int b2_view=0;		//조회수
+		try {
+			con=pool.getConnection();
+			sql="select max(b2_num) from b2";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b2_num=rs.getInt(1)+1;
+			}else {
+				b2_num=1;
+			}
+			System.out.println("insertArticle ==> b2_num"+b2_num);
+			
+			sql="select max(b2_reply) from b2";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				b2_reply=rs.getInt(1)+1;
+			}
+			
+			
+			sql="insert into b2(b2_num,b2_title,b2_content,userID,b2_view,b2_date,b2_reply,b2_step) values(?,?,?,?,?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setInt(1, b2_num);
+			pstmt.setString(2, article.getB2_title());
+			pstmt.setString(3, article.getB2_content());
+			pstmt.setString(4, article.getUserID());
+			pstmt.setInt(5,b2_view);
+			pstmt.setTimestamp(6,article.getB2_date());
+			pstmt.setInt(7, b2_reply);
+			pstmt.setInt(8, article.getB2_step());
+			int insert=pstmt.executeUpdate();
+			System.out.println("insert=>"+insert);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("insertArticle 메서드 에러유발"+e);
+		}finally {
+			pool.freeConnection(con,pstmt,rs);
+		}
+	}
 	// 글상세 보기
-	// content.jsp?num=<%=article.getNum()%>&pageNum=<%=currentPage%>">
-	// 형식) select * from board where num=3
-	// 형식) update board set readcount=readcount+1 where num=3
 	public QnaDTO getArticle(int num) {
 
 		QnaDTO article = null;// ArrayList articleList=null;
