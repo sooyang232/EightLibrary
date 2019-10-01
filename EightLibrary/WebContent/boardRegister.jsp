@@ -117,7 +117,11 @@
                 </div>
                 
                 <div class="board regist-area">
-                    <form name="registForm" id="registForm" method="post">
+                    <form name="registForm" id="registForm" method="post"
+                    		 action="writePro.do" onsubmit="return writeSave()">
+                    		 
+                    		 <input type="hidden" name="b1_num" value="${b1_num}">
+                    		  
                         <table class="table th-bg">
                             <colgroup>
                                 <col width="15%">
@@ -125,32 +129,38 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <th scope="row"><label for="title">제목</label></th>
-                                    <td><input type="text" class="form" name="title" id="title"></td>
+                                    <th scope="row"><label for="b1_title">제목</label></th>
+                                    <td><input type="text" class="form" name="b1_title" id="b1_title"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">작성자</th>
-                                    <td>작성자명</td>
+                                    <th scope="row"><label for="userID">작성자</label></th>
+                                    <td>
+                                    	<input type="text" class="form" name="userID" value="${userID}">
+                                    </td>
                                 </tr>
-                                <tr>
+                               <!--  <tr>
                                     <th scope="row"><label for="secretY">공개여부</label></th>
                                     <td class="bd01td">
                                         <input type="radio" name="secretYn" id="secretN" value="N"> 공개
                                         <input type="radio" name="secretYn" id="secretY" value="Y" checked="checked"> 비공개
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
-                                    <th scope="row"><label for="content">내용</label></th>
-                                    <td><textarea name="content" id="content" rows="15" class="form" title="상세 내용 입력"></textarea></td>
+                                    <th scope="row"><label for="b1_content">내용</label></th>
+                                    <td><textarea name="b1_content" id="b1_content" rows="15" class="form" title="상세 내용 입력"></textarea></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="btn-area tar">
+                        	<input type="submit" value="등록" class="btn deep-blue">
+		                    <a href="board.do" role="button" class="btn blue-gray">취소</a>
+		                </div>
                     </form>
                 </div>
-                <div class="btn-area tar">
+               <!--  <div class="btn-area tar">
                     <a href="#" role="button" class="btn deep-blue">등록</a>
                     <a href="#" role="button" class="btn blue-gray">취소</a>
-                </div>
+                </div> -->
 			</div>
 		</div>
 	</div>

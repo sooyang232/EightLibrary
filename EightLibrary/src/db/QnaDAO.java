@@ -262,6 +262,7 @@ public class QnaDAO {
 			pstmt.setTimestamp(6,article.getB2_date());
 			pstmt.setInt(7, b2_reply);
 			pstmt.setInt(8, article.getB2_step());
+			
 			int insert=pstmt.executeUpdate();
 			System.out.println("insert=>"+insert);
 		} catch (Exception e) {

@@ -3,6 +3,8 @@ package db;
 import java.sql.*;
 import java.util.*;
 
+
+
 public class BoardDAO {
 
 	private DBConnectionMgr pool=null;	//1.연결할객체 선언
@@ -257,6 +259,42 @@ public List getArticles(int start,int end) {
 			
 			return article;
 		}
+
+	public void insertArticle(BoardDTO article) {
+		int b1_num = 0;// 글번호
+		int b1_view = 0;// 조회수
+		try {
+			con = pool.getConnection();
+			sql = "select max(b1_num)	from b1";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				b1_num = rs.getInt(1) + 1;
+			} else {
+				b1_num = 1;
+			}
+			System.out.println("insertArticle==>b1_num" + b1_num);
+
+			sql = "insert into b1(b1_num,b1_title,b1_content,userID,b1_view,b1_date) values(?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, b1_num);
+			pstmt.setString(2, article.getB1_title());
+			pstmt.setString(3, article.getB1_content());
+			pstmt.setString(4, article.getUserID());
+			pstmt.setInt(5, b1_view);
+			pstmt.setTimestamp(6, article.getB1_date());
+
+			int insert = pstmt.executeUpdate();
+			System.out.println("insert=>" + insert);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("insert article메서드 에러유발" + e);
+
+		}finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+	}
 }
 
 
