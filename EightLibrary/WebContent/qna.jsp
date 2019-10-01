@@ -183,14 +183,12 @@
 											</div>
 											<div class="board-mobile-contents">
 												<span class="contents-item">${article.userID}</span> 
-												<span class="contents-item">${article.b2_date}</span> 
+												<span class="contents-item">${date}</span> 
 												<span class="contents-item">${article.b2_view}</span>
 											</div>
 									</a></td>
 									<td class="board-list-user">${article.userID}</td>
-									<td class="board-list-date">${date}
-										<%-- <fmt:formatDate value="${article.b2_date}" pattern="yyyy.MM.dd" /> --%>
-									</td>
+									<td class="board-list-date">${date}</td>
 									<td class="board-list-view">${article.b2_view}</td>
 								</tr>
 							</c:forEach>

@@ -169,15 +169,16 @@
                             </tbody>
                         </table>
                         <!-- form 작성 내용 전달위해 form 태그 안에서 전송버튼 필요 -->
-                        <input type="submit" value="등록">
+                        <div class="btn-area tar">
+                        	<input type="submit" value="등록" class="btn deep-blue">
+                        	<a href="qna.do" role="button" class="btn blue-gray">취소</a>
+                        </div>
                     </form>
                 </div>
-                <div class="btn-area tar">
-                	<!-- <input type="submit" value="등록" class="btn deep-blue"> -->
-                    <!-- <a href="#" role="button" class="btn deep-blue">등록</a> -->
-                    <!-- <input type="submit" value="등록"> -->
+                <!-- <div class="btn-area tar">
+                    <a href="#" role="button" class="btn deep-blue">등록</a>
                     <a href="qna.do" role="button" class="btn blue-gray">취소</a>
-                </div>
+                </div> -->
 			</div>
 		</div>
 	</div>
