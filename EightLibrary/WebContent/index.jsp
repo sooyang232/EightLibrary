@@ -34,7 +34,7 @@
 				<c:if test="${empty userID}">
 					<ul class="gnb-list">
 							<li class="login"><a href="login.do">로그인</a></li>
-							<li><a href="join1.html">회원가입</a></li>
+							<li><a href="join1.do">회원가입</a></li>
 					</ul>
 				</c:if>
 				</div>

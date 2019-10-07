@@ -99,17 +99,18 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement pstmt=null;    
 		boolean check = false;//회원가입성공유무
+		String sql = null;
 
 		try
 		{
 		  //DB접속구문
 		  con = pool.getConnection();
 		  //트랜잭션처리
-		  con.setAutoCommit(false);//DB작업의시작
+		  //con.setAutoCommit(false);//DB작업의시작
 
-	     String sql="insert into user values(?,?,?,?,?,?)";
-
+	     sql="insert into user values(?,?,?,?,?,?)";
 		 pstmt = con.prepareStatement(sql);
+		 
 	     pstmt.setString(1,user.getUserID());
 		 pstmt.setString(2,user.getUserPWD());
 		 pstmt.setString(3,user.getUserName());
@@ -127,7 +128,7 @@ public class UserDAO {
 		}
 		catch (Exception ex)
 		{
-	      System.out.println("=memberInsert()에러=");
+	      System.out.println("=userInsert()에러=");
 	      System.out.println(ex);
 		}finally{	//DB객체를 해제
 	      pool.freeConnection(con,pstmt);

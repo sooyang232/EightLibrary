@@ -586,6 +586,18 @@ function checkEmail(form) {
 	return true;
 }
 	
+//중복id 체크
+function idCheck(id){
+	var form = document.joinForm;
+    if(id==""){
+          alert("아이디를 먼저 입력해주세요!");
+		  form.userID.focus();
+	}else{
+		url="idCheck.jsp?userID="+id;
+		window.open(url,"post","width=300,height=150");
+	}
+}
+
 // id 중복체크 창 띄우기
 function checkId() {
 	var form = document.memberForm;
@@ -609,10 +621,10 @@ function checkId() {
 
 // id 중복체크 창 띄우기
 function checkIdDup() {
-	var form = document.memberForm;
-	if (isEmpty(form.user_id)) {
+	var form = document.joinForm;
+	if (isEmpty(form.userID)) {
 		alert("아이디를 입력해주세요.");
-		form.user_id.focus();
+		form.userID.focus();
 		return;
 	}
 	if (isLength(form.user_id.value)<6 || isLength(form.user_id.value)>12) {
@@ -726,417 +738,69 @@ function bookch_yn_check() {
 		return false;
 	}
 }
+//회원가입
+function userReg(){
+	document.location="join1.do";
+}
+function checkAll(){
+	if($("#checkAll").is(':checked')){
+		$("input[type=checkbox]").prop("checked",true);
+	}else{
+		$("input[type=checkbox]").prop("checked",false);
+	}
+}
+//비어있는 값 체크
 function join() {
-	var form = document.memberForm;
+	var form = document.joinForm;
 	
-	if (isEmpty(form.name)) {
+	if (isEmpty(form.userName)) {
 		alert("성명을 입력해 주세요.");
-		form.name.focus();
+		form.userName.focus();
 		return;
 	}
 
-	// 생년월일 체크
-	if (isEmpty(form.birthday)) {
-		alert("생년월일을 입력해 주세요.");
-		form.birthday.focus();
-		return;
-	} else {
-		var num, year, month, day;
-		num = form.birthday.value.split('/').join('');
-		if (num.length == 8) {
-			year = num.substring(0, 4);
-			month = num.substring(4, 6);  
-			day = num.substring(6, 8);
-			if (isValidDay(year,month,day) == false) {
-				alert("유효하지 않는 일자입니다. 다시 확인하시고 입력해 주세요.");
-				form.birthday.focus();
-				return;	
-			}           
-		} else {
-			alert("날짜형식을 확인하시고 입력해 주세요.");
-			form.birthday.focus();
-   			return;
-   		}
-		if (!chkYmd(num)) {
-			alert("현재일자를 넘을 수 없습니다. 다시 확인하시고 입력해 주세요.");
-			form.birthday.focus();
-			return;
-		}
-	}
-	/*
-	// 성별을 회원 항목에서 제거. 2018/06/19
-	var checkCnt = $("input:radio[name=sex]:checked").size();
-	if (checkCnt == 0) {
-		alert("성별을 입력해 주세요.");
-		return;
-	}
-	*/
-
-	if (!verifyDsab())
-		return false;
+	/*if (!verifyDsab())
+		return false;*/
 
 	// ID 중복 체크 여부 체크
-	if (isEmpty(form.user_id)) {
+	if (isEmpty(form.userID)) {
 		alert("아이디를 입력해주세요.");
-		form.user_id.focus();
-		return;
-	}
-	if (isLength(form.user_id.value)<6 || isLength(form.user_id.value)>12) {
-		alert("아이디는 6자이상 12자 이내로 쓸 수 있습니다.");
-		form.user_id.focus();
-		return;
-	}
-	if (!isAlphaNum(form.user_id)) {
-		alert("아이디는 영어, 숫자만 쓸 수 있습니다.");
-		form.user_id.focus();
+		form.userID.focus();
 		return;
 	}
 
-	if (form.idChecked.value != 'Y') {
-		alert("ID 중복 체크를 해 주세요.");
-		document.getElementById("user_id").focus();
-		return;
-	}
-
-
-	
-	/*
 	// 비밀번호 체크
-	if (isEmpty(form.password)) {
+	if (isEmpty(form.userPWD)) {
 		alert("비밀번호를 입력해주세요.");
-		form.password.focus();
+		form.userPWD.focus();
 		return;
 	}
-	if (isLength(form.password.value)<4 || isLength(form.password.value)>12) {
-		alert("비밀번호는 4자 이상 12자 이내로 쓸 수 있습니다.");
-		form.password.focus();
-		return;
-	}
-	if (!isAlphaNum(form.password)) {
-		alert("비밀번호는 영어, 숫자만 쓸 수 있습니다.");
-		form.password.focus();
-		return;
-	}
-	if (isEmpty(form.password_confirm)) {
+	if (isEmpty(form.p_confirm)) {
 		alert("비밀번호 확인란을 입력해주세요.");
-		form.password_confirm.focus();
+		form.p_confirm.focus();
 		return;
 	}
-	if (isLength(form.password_confirm.value)<4 || isLength(form.password_confirm.value)>12) {
-		alert("비밀번호는 4자 이상 12자 이내로 쓸 수 있습니다.");
-		form.password_confirm.focus();
-		return;
-	}
-	if (!isAlphaNum(form.password_confirm)) {
-		alert("비밀번호는 영어, 숫자만 쓸 수 있습니다.");
-		form.password_confirm.focus();
-		return;
-	}
-	*/
-	// 비밀번호 체크
-	if (isEmpty(form.password)) {
-		alert("비밀번호를 입력해주세요.");
-		form.password.focus();
-		return;
-	}
-	if (!fnCheckPassword(form.user_id.value, form.password.value)) {
-		form.password.focus();
-		return;
-	}
-	if (isEmpty(form.password_confirm)) {
-		alert("비밀번호 확인란을 입력해주세요.");
-		form.password_confirm.focus();
-		return;
-	}
-	if (!fnCheckPassword(form.user_id.value, form.password_confirm.value)) {
-		form.password_confirm.focus();
-		return;
-	}
-	if (form.password.value != form.password_confirm.value) {
+	if (form.userPWD.value != form.p_confirm.value) {
 		alert("비밀번호가 일치하지 않습니다. 다시 확인하시고 입력해 주세요.");
-		form.password_confirm.focus();
+		form.p_confirm.focus();
 		return;
 	}
-	
-	// 우편번호 체크	
-	if (isNull(form.zip_code1)) {
-		alert("우편번호 검색를 이용하여 우편번호를 입력해 주세요.");
-		form.zip_code1.focus();
-		return;
-	}
-	// 주소 체크
-	if (isNull(form.address1)) {
-		alert("우편번호 검색를 이용하여 주소를 입력해 주세요.");
-		form.zip_code1.focus();
-		return;
-	}
-	// 주소 체크
-	if (isNull(form.address2)) {
-		alert("나머지 주소를 입력해 주세요.");
-		form.address2.focus();
-		return;
-	}
-	if (isNull(form.address2)) {
-		alert("나머지 주소를 입력해 주세요.");
-		form.address2.focus();
-		return;
-	}
-	
-	// 직업 체크
-	/*
-	if (isEmpty(form.job)) {
-		alert("직업을 선택해주세요.");
-		form.job.focus();
-		return;
-	}
-	*/
-
-
-	if ($(':radio[name=user_type]:checked').val() == "2" && form.gpki_yn.value != "Y" && form.ecert_status.value == "N") {
-		alert("공무원인 경우 GPKI인증 또는 이메일인증을 받으셔야 합니다.");
-		return;
-	}
-
-	/*
-	if ($(':radio[name=user_type]:checked').val() == "2" && form.gpki_yn.value != "Y") {
-		alert("공무원인 경우 GPKI인증을 받으셔야 합니다.");
-		return;
-	}
-	*/
 	
 	// 전화번호, 휴대전화번호 체크	
-	if ((isEmpty(form.mobile1) || isEmpty(form.mobile2) || isEmpty(form.mobile3))) {
+	if (isEmpty(form.userTel) ) {
 		alert("연락처를 입력해주세요.");
-		form.tel1.focus();
+		form.userTel.focus();
 		return;
 	}
-	
-	/*
-	// sms 통보 여부 체크시 휴대전화번호 체크
-	if (form.sms_yn.checked) {	
-		if (isEmpty(form.mobile1) || isEmpty(form.mobile2) || isEmpty(form.mobile3)) {
-			alert("SMS 통보 여부를 확인하기 위해서는 핸드폰 번호를 정확하게 입력해주셔야 합니다.");
-			form.mobile1.focus();
-			return ;
-		}
-	}
-	*/
-	
-	var b = checkEmail(form);
-	if (!b) return false;
-	/******************************************************
-	* 선택정보 중 "시각장애인 원문서비스 이용 여부"를 체크 시 활성화
-	******************************************************/
-	if (form.dsab_yn.checked) {
-		var dsabO = $('select[name=dsab_kind]'); //$(':radio[name=dsab_kind]:checked');
-		// if (dsabO.val() != '2') {
-		if (dsabO.val() == '1') {
-			alert("시각장애인 서비스를 이용하기 위해서는 장애구분(시각), 장애등급을 반드시 입력하셔야 합니다.");
-			dsabO.focus();
-			return;
-		}
-		if (!isEmpty(form.upFile)) {
-			if (!fileCheck(form.upFile)) {
-				alert("해당파일은 업로드할 수 없습니다.");
-				return;
-			}
-		}
-		if (isEmpty(form.e_mail1)) {
-			alert("시각원문 이용 여부를 선택시에 이메일을 반드시 입력하셔야 합니다.");
-			form.e_mail1.focus();
-			return;
-		}
-	}
-	/******************************************************
-	* DAISY - 음성기기 추가
-	******************************************************/
-	if (form.daisy_yn.checked) {
-		var tmpl_table = document.getElementById('template');
-		var template = document.getElementById('template').innerHTML;
-		tmpl_table.deleteRow(0);
-		//alert("Daisy CHECKED start!!");
-		// 배열이 아닐 때는 length 값이 없음, 
-		//alert("길이:"+form.company_name.length);
-		if (form.company_name.length > 1) {
-			for (var i = 0; i < form.company_name.length; i++) {
-				if (isEmpty(form.company_name[i])) {
-					alert("음성기기 등록 항목 중 비어있는 항목이 존재합니다.\n"
-					+ "회사명, 기기명, 인증번호 모두 입력하여야 음성기기를 등록할 수 있으며,\n"
-					+ "입력하지 못한 입력 창은 '삭제'하여 주시기 바랍니다.(1)");
-					$("#template").append(template);
-					return;
-					//alert("non company_name["+i+"]");
-				}
-				//alert(form.company_name[i].value);
-			}
-			for (var i = 0; i < form.model_name.length; i++) {
-				if (isEmpty(form.model_name[i])) {
-					alert("음성기기 등록 항목 중 비어있는 항목이 존재합니다.\n"
-					+ "회사명, 기기명, 인증번호 모두 입력하여야 음성기기를 등록할 수 있으며,\n"
-					+ "입력하지 못한 입력 창은 '삭제'하여 주시기 바랍니다.(2)");
-					$("#template").append(template);
-					return;
-				}
-			}
-			for ( var i = 0; i < form.model_no.length; i++) {
-				if (isEmpty(form.model_no[i])) {
-					alert("음성기기 등록 항목 중 비어있는 항목이 존재합니다.\n"
-					+ "회사명, 기기명, 인증번호 모두 입력하여야 음성기기를 등록할 수 있으며,\n"
-					+ "입력하지 못한 입력 창은 '삭제'하여 주시기 바랍니다.(3)");
-					$("#template").append(template);
-					return;
-				}
-			}
-		} else { // 배열의 길이가 2가 안될 때, 즉 배열이 아닐 때임
-			//alert("length 길이가 2가 안됩니다."); 
-			if (isEmpty(form.company_name)) { 
-				alert("회사명 없음");
-				form.company_name.focus();
-				$("#template").append(template);
-				return;
-			}
-			if (isEmpty(form.model_name)) { 
-				alert("기기명 없음");
-				form.model_name.focus();
-				$("#template").append(template);
-				return;
-			}
-			if (isEmpty(form.model_no)) { 
-				alert("인증번호 없음");
-				form.model_no.focus();
-				$("#template").append(template);
-				return;
-			}
-		}
-		//}		
-	} else {
-		//alert("NON");
-	}
-	
-	//alert("Daisy 체크 통과!!");
-	//return;
-	
-	/*
-	var nfavorite_chk_arr = document.getElementsByName("nfavorite");
-	var nfavorite_len = nfavorite_chk_arr.length;
-	var nfavorite_chk_cnt = 0;
-	for (var i = 0; i < nfavorite_len; i++) {
-		if (nfavorite_chk_arr[i].checked)
-		{
-			nfavorite_chk_cnt = nfavorite_chk_cnt + 1;
-		}
-	}
-	if (nfavorite_chk_cnt > 2)
-	{
-		alert("관심분야는 2개까지만 선택가능합니다.");
+	//이메일 체크
+	if(isEmpty(form.userEmail)){
+		alert("이메일을 입력해주세요.");
+		form.userEmail.focus();
 		return;
-	}	
-	*/
-
-	/******************************************************
-	* 선택정보 중 "국립중앙도서관 이용 여부"를 체크 시 활성화
-	******************************************************/
-	if (form.nluse_yn.checked) {
-		/*
-		// 신착정보서비스 체크시 메일 및 키워드 체크
-		if (form.sdi_yn.checked) {	
-			if (isEmpty(form.sdi_keyword) && isEmpty(form.sdi_keyword2) && isEmpty(form.sdi_keyword3)) {
-				alert("신착정보서비스를 이용하기 위해서는 키워드를 반드시 입력하셔야 합니다.");
-				form.sdi_keyword.focus();
-				return;
-			}
-		}
-		*/
-		if (isEmpty(form.limit_period)) {
-			alert("유효기간을 선택하셔야 합니다.");
-			form.limit_period.focus();
-			return;
-		}
 	}
-
-	/******************************************************
-	* 선택정보 중 "국립어린이청소년도서관 이용 여부"를 체크 시 활성화
-	******************************************************/
-	if (form.teenageruse_yn.checked) {	
-		var chkcount = 0;
-		 for (var i=0; i<form.favorite_pds.length;i++) {
-			if (form.favorite_pds[i].value) {
-				chkcount ++;
-			}
-		 }
-		if (chkcount == 0) {
-			alert("적어도 하나의 이용할 자료실을 선택하셔야 합니다.");
-			form.favorite_pds.focus();
-			return;
-		}	
-		if (isEmpty(form.limit_period2)) {
-			alert("유효기간을 선택하셔야 합니다.");
-			form.limit_period2.focus();
-			return;
-		}		
-	}
+	//======================================================
 	
-	/******************************************************
-	* 선택정보 중 "책바다 국가상호대차서비스  이용 여부"를 체크 시 활성화
-	******************************************************/
-	if (form.bookch_yn.checked) {	
-		if (isEmpty(form.PhoneReg)) {
-			alert("책바다 상호대차서비스 이용 여부를 선택하신 경우, 휴대전화번호 인증을 하셔야 합니다.");
-			form.mobile1.focus();
-			return;
-		}
-		if (isEmpty(form.e_mail1)) {
-			alert("책바다 상호대차서비스 이용 여부를 선택하신 경우, 이메일을 반드시 입력하셔야 합니다.");
-			form.e_mail1.focus();
-			return;
-		}
-		if (isEmpty(form.libname)) {
-			alert("도서관을 선택해주십시오.");
-			form.libname.focus();
-			return;
-		}
-		if (isEmpty(form.userkey)) {
-			alert("이용자번호를 입력해주십시오.");
-			form.userkey.focus();
-			return;
-		}
-	}
-	
-	if (!isEmpty(form.userkey) || !isEmpty(form.libname)){
-		if (!form.bookch_yn.checked) {
-			alert("국가상호대차서비스를 이용하기 위해서는 책바다 국가상호대차서비스 이용 여부를 체크해 주셔야 합니다.");
-			document.getElementById("bookch_yn").focus();
-		return;
-		}
-	}
-
-	//맞춤형 알림서비스 추가 Start 2013.03.28
-	var kdc_set_panel_set_li = $('#kdc_set_panel_set').find("ul").find("li");
-
-	if (kdc_set_panel_set_li && kdc_set_panel_set_li.length > 0) {
-		var favorite_kdc_tmp = "";
-		var favorite_ddc_tmp = "";
-		for (var i = 0; i < kdc_set_panel_set_li.length; i++) {
-			var set_id = kdc_set_panel_set_li[i].id;
-			set_id = set_id.substr("favorite_kdc_desc_list_".length);
-			if (i == kdc_set_panel_set_li.length - 1) {
-				favorite_kdc_tmp += set_id;
-				favorite_ddc_tmp += kdc_ddc_mapping_list[set_id];
-			} else {
-				
-				favorite_kdc_tmp += set_id + ";";
-				favorite_ddc_tmp += kdc_ddc_mapping_list[set_id] + ";";
-			}
-		}
-		document.getElementById("kdc_favorite").value = favorite_kdc_tmp;
-		document.getElementById("ddc_favorite").value = favorite_ddc_tmp;
-	} else {
-		document.getElementById("kdc_favorite").value = "";
-		document.getElementById("ddc_favorite").value = "";
-	}
-	//맞춤형 알림서비스 추가 End 2013.03.28
-	
-	document.getElementById("joinBtn").style.display = "none";
+	//document.getElementById("joinBtn").style.display = "none";
 	form.submit();
 }
 
